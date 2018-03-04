@@ -12,11 +12,11 @@ import java.util.NoSuchElementException;
  * @author Ivan Zemlyanskiy
  */
 @Getter
-public class BucketFill implements Command {
+public class CommandBucketFill implements Command {
     private final Point startPoint;
     private final Colour colour;
 
-    public BucketFill(Deque<String> args) {
+    public CommandBucketFill(Deque<String> args) {
         try {
             startPoint = new Point(Integer.valueOf(args.pop()), Integer.valueOf(args.pop()));
             String colour = args.pop();
@@ -27,7 +27,7 @@ public class BucketFill implements Command {
 
         } catch (NoSuchElementException | NumberFormatException e) {
             throw new IllegalArgumentException(
-                    "Arguments for Rectangle command should have 4 coordinates which represent as 4 integer values"
+                    "Arguments for CommandBucketFill should have 4 coordinates which represent as 4 integer values"
             );
         }
     }

@@ -1,5 +1,6 @@
 package com.creditsuisse.drawing;
 
+import com.creditsuisse.drawing.canvas.CanvasManager;
 import com.creditsuisse.drawing.canvas.ConsoleCanvas;
 import com.creditsuisse.drawing.command.*;
 
@@ -18,7 +19,7 @@ public class Drawing {
 
 
         Writer writer = new PrintWriter(System.out);
-        ConsoleCanvas canvas = new ConsoleCanvas();
+        CanvasManager manager = new CanvasManager(new ConsoleCanvas());
 
         CommandParser parser = new CommandParser();
         Command command;
@@ -33,9 +34,9 @@ public class Drawing {
             }
 
             try {
-                command.draw(canvas);
+                manager.applyCommand(command);
 
-                canvas.show(writer);
+                manager.show(writer);
             } catch (IllegalStateException e) {
                 writer.append(e.getMessage());
             }

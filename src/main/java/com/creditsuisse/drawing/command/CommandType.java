@@ -12,10 +12,10 @@ import java.util.function.Function;
  */
 @RequiredArgsConstructor
 public enum CommandType {
-    NEW_CANVAS("C", NewCanvas::new),
-    LINE("L", Line::new),
-    RECTANGLE("R", Rectangle::new),
-    BUCKET_FILL("B", BucketFill::new),
+    NEW_CANVAS("C", CommandNewCanvas::new),
+    LINE("L", CommandLine::new),
+    RECTANGLE("R", CommandRectangle::new),
+    BUCKET_FILL("B", CommandBucketFill::new),
     QUIT("Q", Quit::new),
     ;
 

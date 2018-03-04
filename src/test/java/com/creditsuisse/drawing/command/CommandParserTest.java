@@ -15,8 +15,8 @@ public class CommandParserTest {
     public void parseCreateCanvas() {
         String input = "C 1 2";
         Command command = parser.parseCommand(input);
-        assertEquals(NewCanvas.class, command.getClass());
-        NewCanvas newCanvas = (NewCanvas) command;
+        assertEquals(CommandNewCanvas.class, command.getClass());
+        CommandNewCanvas newCanvas = (CommandNewCanvas) command;
         assertEquals(1, newCanvas.getWidth());
         assertEquals(2, newCanvas.getHeight());
     }
@@ -25,20 +25,26 @@ public class CommandParserTest {
     public void parseCreateLine() {
         String input = "L 1 2 3 4";
         Command command = parser.parseCommand(input);
-        assertEquals(Line.class, command.getClass());
-        Line line = (Line) command;
+        assertEquals(CommandLine.class, command.getClass());
+        CommandLine line = (CommandLine) command;
         assertEquals(1, line.getStart().getX());
         assertEquals(2, line.getStart().getY());
         assertEquals(3, line.getEnd().getX());
         assertEquals(4, line.getEnd().getY());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void parseBadCommandCreateLine() {
+        String input = "L 1 2 3";
+        Command command = parser.parseCommand(input);
+    }
+
     @Test
     public void parseCreateRectangle() {
         String input = "R 1 2 3 4";
         Command command = parser.parseCommand(input);
-        assertEquals(Rectangle.class, command.getClass());
-        Rectangle rectangle = (Rectangle) command;
+        assertEquals(CommandRectangle.class, command.getClass());
+        CommandRectangle rectangle = (CommandRectangle) command;
         assertEquals(1, rectangle.getLeftCorner().getX());
         assertEquals(2, rectangle.getLeftCorner().getY());
         assertEquals(3, rectangle.getRightCorner().getX());
@@ -49,8 +55,8 @@ public class CommandParserTest {
     public void parseCreateBucketFill() {
         String input = "B 1 2 o";
         Command command = parser.parseCommand(input);
-        assertEquals(BucketFill.class, command.getClass());
-        BucketFill bucketFill = (BucketFill) command;
+        assertEquals(CommandBucketFill.class, command.getClass());
+        CommandBucketFill bucketFill = (CommandBucketFill) command;
         assertEquals(1, bucketFill.getStartPoint().getX());
         assertEquals(2, bucketFill.getStartPoint().getY());
         assertEquals("o".charAt(0), bucketFill.getColour().getValue());
