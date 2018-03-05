@@ -17,37 +17,35 @@ import static java.lang.Math.abs;
  */
 public class BresenhamAlgo {
 
-    static final Colour LINE_COLOUR = new Colour('x');
-
-    public Shape drawLine(Point start, Point end) {
+    public Shape drawLine(Point start, Point end, Colour colour) {
         if (start.equals(end)) {
-            return new Shape(Collections.singletonList(new Pixel(start, LINE_COLOUR)));
+            return new Shape(Collections.singletonList(new Pixel(start, colour)));
         }
 
         if (start.getX() == end.getX()) {
             int x = start.getX();
             return new Shape(IntStream.rangeClosed(start.getY(), end.getY())
-                                     .mapToObj(y -> new Pixel(x, y, LINE_COLOUR))
+                                     .mapToObj(y -> new Pixel(x, y, colour))
                                      .collect(Collectors.toList()));
         }
 
         if (abs(start.getY() - end.getY()) < abs(start.getX() - end.getX())) {
             if (start.getX() > end.getX()) {
-                return bresenhamLow(end.getX(), end.getY(), start.getX(), start.getY());
+                return bresenhamLow(end.getX(), end.getY(), start.getX(), start.getY(), colour);
             } else {
-                return bresenhamLow(start.getX(), start.getY(), end.getX(), end.getY());
+                return bresenhamLow(start.getX(), start.getY(), end.getX(), end.getY(), colour);
             }
         } else {
             if (start.getY() > end.getY()) {
-                return bresenhamHeight(end.getX(), end.getY(), start.getX(), start.getY());
+                return bresenhamHeight(end.getX(), end.getY(), start.getX(), start.getY(), colour);
             } else {
-                return bresenhamHeight(start.getX(), start.getY(), end.getX(), end.getY());
+                return bresenhamHeight(start.getX(), start.getY(), end.getX(), end.getY(), colour);
             }
         }
 
     }
 
-    private Shape bresenhamLow(int x0, int y0, int x1, int y1) {
+    private Shape bresenhamLow(int x0, int y0, int x1, int y1, Colour colour) {
         final int deltaX = abs(x1 - x0);
         final int deltaY = y1 - y0;
 
@@ -69,7 +67,7 @@ public class BresenhamAlgo {
 
             @Override
             public Pixel next() {
-                Pixel result = new Pixel(currentX, currentY, LINE_COLOUR);
+                Pixel result = new Pixel(currentX, currentY, colour);
 
                 error = error + deltaError;
                 if (2 * error > deltaX) {
@@ -84,7 +82,7 @@ public class BresenhamAlgo {
     }
 
 
-    private Shape bresenhamHeight(int x0, int y0, int x1, int y1) {
+    private Shape bresenhamHeight(int x0, int y0, int x1, int y1, Colour colour) {
         final int deltaX = x1 - x0;
         final int deltaY = abs(y1 - y0);
 
@@ -106,7 +104,7 @@ public class BresenhamAlgo {
 
             @Override
             public Pixel next() {
-                Pixel result = new Pixel(currentX, currentY, LINE_COLOUR);
+                Pixel result = new Pixel(currentX, currentY, colour);
 
                 error = error + deltaError;
                 if (2 * error > deltaY) {

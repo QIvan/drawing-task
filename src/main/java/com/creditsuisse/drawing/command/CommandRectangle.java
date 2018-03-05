@@ -2,6 +2,7 @@ package com.creditsuisse.drawing.command;
 
 import com.creditsuisse.drawing.algo.BresenhamAlgo;
 import com.creditsuisse.drawing.canvas.Canvas;
+import com.creditsuisse.drawing.primitive.Colour;
 import com.creditsuisse.drawing.primitive.Point;
 import com.creditsuisse.drawing.primitive.Shape;
 import lombok.Getter;
@@ -20,6 +21,7 @@ import java.util.stream.Stream;
 public class CommandRectangle implements Command {
 
     private static final BresenhamAlgo lineAlgo = new BresenhamAlgo();
+    public static final Colour RECTANGLE_COLOUR = new Colour('x');
 
     private final Point leftCorner;
     private final Point rightCorner;
@@ -39,10 +41,10 @@ public class CommandRectangle implements Command {
     @Override
     public Shape draw(Canvas canvas) {
         return new Shape(IterableUtils.chainedIterable(
-                lineAlgo.drawLine(leftCorner, new Point(rightCorner.getX(), leftCorner.getY())),
-                lineAlgo.drawLine(leftCorner, new Point(leftCorner.getX(), rightCorner.getY())),
-                lineAlgo.drawLine(new Point(leftCorner.getX(), rightCorner.getY()), rightCorner),
-                lineAlgo.drawLine(new Point(rightCorner.getX(), leftCorner.getY()), rightCorner)
+                lineAlgo.drawLine(leftCorner, new Point(rightCorner.getX(), leftCorner.getY()), RECTANGLE_COLOUR),
+                lineAlgo.drawLine(leftCorner, new Point(leftCorner.getX(), rightCorner.getY()), RECTANGLE_COLOUR),
+                lineAlgo.drawLine(new Point(leftCorner.getX(), rightCorner.getY()), rightCorner, RECTANGLE_COLOUR),
+                lineAlgo.drawLine(new Point(rightCorner.getX(), leftCorner.getY()), rightCorner, RECTANGLE_COLOUR)
         ));
 
     }

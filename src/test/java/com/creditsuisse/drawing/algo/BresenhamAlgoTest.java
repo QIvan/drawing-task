@@ -1,5 +1,6 @@
 package com.creditsuisse.drawing.algo;
 
+import com.creditsuisse.drawing.primitive.Colour;
 import com.creditsuisse.drawing.primitive.Pixel;
 import com.creditsuisse.drawing.primitive.Point;
 import com.creditsuisse.drawing.primitive.Shape;
@@ -23,7 +24,7 @@ public class BresenhamAlgoTest {
 
     @Test
     public void drawLine() {
-        Shape line = algo.drawLine(new Point(0, 1), new Point(6, 4));
+        Shape line = algo.drawLine(new Point(0, 1), new Point(6, 4), new Colour('x'));
 
         assertEquals(Arrays.asList(new Pixel(0, 1, 'x'),
                                    new Pixel(1, 1, 'x'),
@@ -39,7 +40,7 @@ public class BresenhamAlgoTest {
 
     @Test
     public void drawVerticalLine() {
-        Shape line = algo.drawLine(new Point(0, 1), new Point(0, 4));
+        Shape line = algo.drawLine(new Point(0, 1), new Point(0, 4), new Colour('x'));
 
         assertEquals(Arrays.asList(new Pixel(0, 1, 'x'),
                                    new Pixel(0, 2, 'x'),
@@ -52,7 +53,7 @@ public class BresenhamAlgoTest {
 
     @Test
     public void drawHorizontalLine() {
-        Shape line = algo.drawLine(new Point(1, 0), new Point(5, 0));
+        Shape line = algo.drawLine(new Point(1, 0), new Point(5, 0), new Colour('x'));
 
         assertEquals(Arrays.asList(new Pixel(1, 0, 'x'),
                                    new Pixel(2, 0, 'x'),
@@ -66,7 +67,7 @@ public class BresenhamAlgoTest {
 
     @Test
     public void drawDot() {
-        Shape line = algo.drawLine(new Point(0, 0), new Point(0, 0));
+        Shape line = algo.drawLine(new Point(0, 0), new Point(0, 0), new Colour('x'));
 
         assertEquals(Collections.singletonList(new Pixel(0, 0, 'x')),
                      IterableUtils.toList(line));
@@ -75,7 +76,7 @@ public class BresenhamAlgoTest {
 
     @Test
     public void drawLineStartToTheLeftEnd() {
-        Shape line = algo.drawLine(new Point(6, 4), new Point(0, 1));
+        Shape line = algo.drawLine(new Point(6, 4), new Point(0, 1), new Colour('x'));
 
         assertEquals(Arrays.asList(new Pixel(0, 1, 'x'),
                                    new Pixel(1, 1, 'x'),
@@ -92,7 +93,7 @@ public class BresenhamAlgoTest {
 
     @Test
     public void drawLineStartUnderEnd() {
-        Shape line = algo.drawLine(new Point(0, 4), new Point(4, 0));
+        Shape line = algo.drawLine(new Point(0, 4), new Point(4, 0), new Colour('x'));
 
         assertEquals(Arrays.asList(new Pixel(4, 0, 'x'),
                                    new Pixel(3, 1, 'x'),
@@ -106,7 +107,7 @@ public class BresenhamAlgoTest {
 
     @Test
     public void drawLineElongatedByY() {
-        Shape line = algo.drawLine(new Point(0, 0), new Point(1, 10));
+        Shape line = algo.drawLine(new Point(0, 0), new Point(1, 10), new Colour('x'));
 
         assertEquals(Arrays.asList(new Pixel(0, 0, 'x'),
                                    new Pixel(0, 1, 'x'),

@@ -2,6 +2,7 @@ package com.creditsuisse.drawing.command;
 
 import com.creditsuisse.drawing.algo.BresenhamAlgo;
 import com.creditsuisse.drawing.canvas.Canvas;
+import com.creditsuisse.drawing.primitive.Colour;
 import com.creditsuisse.drawing.primitive.Point;
 import com.creditsuisse.drawing.primitive.Shape;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import java.util.NoSuchElementException;
 @Getter
 public class CommandLine implements Command {
 
+    public static final Colour LINE_COLOUR = new Colour('x');
     private static final BresenhamAlgo lineAlgo = new BresenhamAlgo();
 
     private final Point start;
@@ -34,7 +36,7 @@ public class CommandLine implements Command {
 
     @Override
     public Shape draw(Canvas canvas) {
-        return lineAlgo.drawLine(start, end);
+        return lineAlgo.drawLine(start, end, LINE_COLOUR);
     }
 
 }
