@@ -25,51 +25,51 @@ class IntegrationTest {
 |                    |
 ----------------------
 """)
-//
-//        parser.parseCommand("L 1 2 6 2").getAlgorithm()
-//        assertCurrentCanvasPicture(canvas,
-//                """
-//----------------------
-//|                    |
-//|xxxxxx              |
-//|                    |
-//|                    |
-//----------------------
-//""")
-//
-//        parser.parseCommand("L 6 3 6 4").getAlgorithm()
-//        assertCurrentCanvasPicture(canvas,
-//                """
-//----------------------
-//|                    |
-//|xxxxxx              |
-//|     x              |
-//|     x              |
-//----------------------
-//""")
-//
-//        parser.parseCommand("R 14 1 18 3").getAlgorithm()
-//        assertCurrentCanvasPicture(canvas,
-//                """
-//----------------------
-//|             xxxxx  |
-//|xxxxxx       x   x  |
-//|     x       xxxxx  |
-//|     x              |
-//----------------------
-//""")
-//
-//        parser.parseCommand("B 10 3 o").getAlgorithm()
-//        assertCurrentCanvasPicture(canvas,
-//                """
-//----------------------
-//|oooooooooooooxxxxxoo|
-//|xxxxxxooooooox   xoo|
-//|     xoooooooxxxxxoo|
-//|     xoooooooooooooo|
-//----------------------
-//""")
-//
+
+        manager.applyCommand(parser.parseCommand("L 0 1 5 1"))
+        assertCurrentCanvasPicture(canvas,
+                """
+----------------------
+|                    |
+|xxxxxx              |
+|                    |
+|                    |
+----------------------
+""")
+
+        manager.applyCommand(parser.parseCommand("L 5 2 5 3"))
+        assertCurrentCanvasPicture(canvas,
+                """
+----------------------
+|                    |
+|xxxxxx              |
+|     x              |
+|     x              |
+----------------------
+""")
+
+        manager.applyCommand(parser.parseCommand("R 13 0 17 2"))
+        assertCurrentCanvasPicture(canvas,
+                """
+----------------------
+|             xxxxx  |
+|xxxxxx       x   x  |
+|     x       xxxxx  |
+|     x              |
+----------------------
+""")
+
+        manager.applyCommand(parser.parseCommand("B 10 3 o"))
+        assertCurrentCanvasPicture(canvas,
+                """
+----------------------
+|oooooooooooooxxxxxoo|
+|xxxxxxooooooox   xoo|
+|     xoooooooxxxxxoo|
+|     xoooooooooooooo|
+----------------------
+""")
+
 
     }
 
