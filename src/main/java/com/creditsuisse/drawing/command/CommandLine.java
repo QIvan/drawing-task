@@ -3,6 +3,7 @@ package com.creditsuisse.drawing.command;
 import com.creditsuisse.drawing.algo.BresenhamAlgo;
 import com.creditsuisse.drawing.canvas.Canvas;
 import com.creditsuisse.drawing.primitive.Point;
+import com.creditsuisse.drawing.primitive.Shape;
 import lombok.Getter;
 
 import java.util.Deque;
@@ -32,8 +33,8 @@ public class CommandLine implements Command {
     }
 
     @Override
-    public void draw(Canvas canvas) {
-        lineAlgo.drawLine(canvas, start, end);
+    public Shape draw(Canvas canvas) {
+        return lineAlgo.drawLine(start, end);
     }
 
 }

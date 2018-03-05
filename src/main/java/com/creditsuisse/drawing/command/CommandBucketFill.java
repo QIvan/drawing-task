@@ -3,10 +3,13 @@ package com.creditsuisse.drawing.command;
 import com.creditsuisse.drawing.canvas.Canvas;
 import com.creditsuisse.drawing.primitive.Colour;
 import com.creditsuisse.drawing.primitive.Point;
+import com.creditsuisse.drawing.primitive.Shape;
 import lombok.Getter;
 
+import java.util.Collections;
 import java.util.Deque;
 import java.util.NoSuchElementException;
+import java.util.stream.Stream;
 
 /**
  * @author Ivan Zemlyanskiy
@@ -33,7 +36,8 @@ public class CommandBucketFill implements Command {
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public Shape draw(Canvas canvas) {
+        return new Shape(Collections::emptyIterator);
 
     }
 }

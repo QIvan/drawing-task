@@ -1,6 +1,7 @@
 package com.creditsuisse.drawing.canvas;
 
 import com.creditsuisse.drawing.command.Command;
+import com.creditsuisse.drawing.primitive.Pixel;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -16,8 +17,13 @@ public class CanvasManager {
         this.canvas = canvas;
     }
 
-    public void applyCommand(Command command) {
-        command.draw(canvas);
+    public boolean applyCommand(Command command) {
+        for (Pixel pixel : command.draw(canvas)) {
+            if (!canvas.drawPixel(pixel)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void show(Writer writer) throws IOException {

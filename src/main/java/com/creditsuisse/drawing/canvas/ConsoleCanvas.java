@@ -1,9 +1,12 @@
 package com.creditsuisse.drawing.canvas;
 
 import com.creditsuisse.drawing.primitive.Colour;
+import com.creditsuisse.drawing.primitive.Pixel;
+import com.creditsuisse.drawing.primitive.Point;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Optional;
 
 /**
  * @author Ivan Zemlyanskiy
@@ -33,15 +36,29 @@ public class ConsoleCanvas implements Canvas {
     }
 
     @Override
-    public void drawPixel(int x, int y, Colour colour) {
+    public boolean drawPixel(Pixel pixel) {
         checkState();
+        if (pointOutOfBound(pixel.getPoint())) {
+            return false;
+        }
 
-        matrix[y][x] = colour.getValue();
+        matrix[pixel.getY()][pixel.getX()] = pixel.getColourValue();
+        return true;
+    }
+
+    @Override
+    public Optional<Pixel> getPixel(Point point) {
+        if (pointOutOfBound(point)) {
+            return Optional.empty();
+        }
+        return Optional.of(new Pixel(point, new Colour(matrix[point.getY()][point.getX()])));
     }
 
     @Override
     public void show(Writer writer) throws IOException {
-        checkState();
+        if (!init) {
+            return;
+        }
 
         for (int i = 0; i < width + 2; i++) {
             writer.append('-');
@@ -67,5 +84,9 @@ public class ConsoleCanvas implements Canvas {
         if (!init) {
             throw new IllegalStateException("Canvas wasn't initialized!");
         }
+    }
+
+    private boolean pointOutOfBound(Point point) {
+        return point.getX() >= width || point.getY() >= height;
     }
 }
