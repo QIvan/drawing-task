@@ -1,14 +1,24 @@
+buildscript {
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.2"
+    }
+}
+
 plugins {
     id 'java'
     id 'groovy'
     id 'idea'
     id 'io.franzbecker.gradle-lombok' version '1.11'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '2.0.2'
 }
 
 group 'com.creditsuisse'
 version '1.0.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
+
+mainClassName = 'com.creditsuisse.drawing.Drawing'
 
 repositories {
     mavenCentral()
