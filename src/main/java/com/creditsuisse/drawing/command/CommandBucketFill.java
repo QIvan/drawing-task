@@ -1,5 +1,6 @@
 package com.creditsuisse.drawing.command;
 
+import com.creditsuisse.drawing.algo.FloodFill4;
 import com.creditsuisse.drawing.canvas.Canvas;
 import com.creditsuisse.drawing.primitive.Colour;
 import com.creditsuisse.drawing.primitive.Point;
@@ -16,6 +17,8 @@ import java.util.stream.Stream;
  */
 @Getter
 public class CommandBucketFill implements Command {
+    private static FloodFill4 fillAlgo = new FloodFill4();
+
     private final Point startPoint;
     private final Colour colour;
 
@@ -37,7 +40,7 @@ public class CommandBucketFill implements Command {
 
     @Override
     public Shape draw(Canvas canvas) {
-        return new Shape(Collections::emptyIterator);
+        return fillAlgo.fill(canvas, startPoint, colour);
 
     }
 }

@@ -8,7 +8,7 @@ import static com.creditsuisse.drawing.canvas.Utils.assertCurrentCanvasPicture
 class IntegrationTest {
 
     @Test
-    void integration() throws Exception {
+    void integrationSampleInput() throws Exception {
         def canvas = new ConsoleCanvas()
         CanvasManager manager = new CanvasManager(canvas)
 
@@ -69,9 +69,40 @@ class IntegrationTest {
 |     xoooooooooooooo|
 ----------------------
 """)
-
-
     }
 
+    @Test
+    public void integrationTestFill() {
+        def canvas = new ConsoleCanvas()
+        CanvasManager manager = new CanvasManager(canvas)
+
+        CommandParser parser = new CommandParser()
+
+
+        manager.applyCommand(parser.parseCommand("C 20 4"))
+        manager.applyCommand(parser.parseCommand("L 0 1 10 3"))
+        manager.applyCommand(parser.parseCommand("L 15 0 19 2"))
+        assertCurrentCanvasPicture(canvas,
+                """
+----------------------
+|               xx   |
+|xxx              xx |
+|   xxxxx           x|
+|        xxx         |
+----------------------
+""")
+
+        manager.applyCommand(parser.parseCommand("B 0 0 o"))
+        assertCurrentCanvasPicture(canvas,
+                """
+----------------------
+|oooooooooooooooxx   |
+|xxxooooooooooooooxx |
+|   xxxxxooooooooooox|
+|        xxxooooooooo|
+----------------------
+""")
+
+    }
 }
 

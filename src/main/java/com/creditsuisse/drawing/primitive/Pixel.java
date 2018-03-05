@@ -8,7 +8,7 @@ import lombok.Value;
  */
 @Value
 @AllArgsConstructor
-public class Pixel {
+public class Pixel implements Comparable<Pixel> {
     Point point;
     Colour colour;
 
@@ -32,5 +32,15 @@ public class Pixel {
 
     public char getColourValue() {
         return colour.getValue();
+    }
+
+    @Override
+    public int compareTo(Pixel other) {
+        int compareX = Integer.compare(point.getX(), other.getX());
+        if (compareX != 0) {
+            return compareX;
+        } else {
+            return Integer.compare(point.getY(), other.getY());
+        }
     }
 }

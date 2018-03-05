@@ -87,6 +87,6 @@ public class ConsoleCanvas implements Canvas {
     }
 
     private boolean pointOutOfBound(Point point) {
-        return point.getX() >= width || point.getY() >= height;
+        return point.getX() < 0 || point.getY() < 0 || point.getX() >= width || point.getY() >= height;
     }
 }
