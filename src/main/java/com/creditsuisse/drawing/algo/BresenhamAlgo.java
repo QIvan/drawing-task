@@ -18,17 +18,6 @@ import static java.lang.Math.abs;
 public class BresenhamAlgo {
 
     public Shape drawLine(Point start, Point end, Colour colour) {
-        if (start.equals(end)) {
-            return new Shape(Collections.singletonList(new Pixel(start, colour)));
-        }
-
-        if (start.getX() == end.getX()) {
-            int x = start.getX();
-            return new Shape(IntStream.rangeClosed(start.getY(), end.getY())
-                                     .mapToObj(y -> new Pixel(x, y, colour))
-                                     .collect(Collectors.toList()));
-        }
-
         if (abs(start.getY() - end.getY()) < abs(start.getX() - end.getX())) {
             if (start.getX() > end.getX()) {
                 return bresenhamLow(end.getX(), end.getY(), start.getX(), start.getY(), colour);
