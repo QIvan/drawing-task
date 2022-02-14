@@ -1,36 +1,42 @@
-buildscript {
-    dependencies {
-        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.2"
-    }
-}
-
 plugins {
     id 'java'
     id 'groovy'
     id 'idea'
-    id 'io.franzbecker.gradle-lombok' version '1.11'
+    id "io.freefair.lombok" version "6.3.0"
     id 'application'
-    id 'com.github.johnrengelman.shadow' version '2.0.2'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id "com.diffplug.spotless" version "6.2.2"
 }
 
-group 'com.creditsuisse'
+group 'com.pulsepoint'
 version '1.0.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+sourceCompatibility = JavaVersion.current()
+targetCompatibility = JavaVersion.current()
 
-mainClassName = 'com.creditsuisse.drawing.Drawing'
+mainClassName = 'com.pulsepoint.drawing.Drawing'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile localGroovy()
-    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
+    implementation localGroovy()
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testRuntimeOnly libs.junit.engine
+    testImplementation libs.bundles.junit
+    implementation libs.apache.collections
 }
 
-lombok {
-    version = "1.16.20"
+spotless {
+    java {
+        googleJavaFormat()
+    }
+    groovy {
+        greclipse()
+    }
+}
+
+test {
+    useJUnitPlatform()
 }
